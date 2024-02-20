@@ -1,8 +1,3 @@
 Best case: O(n)
-The best case occurs when the list is already sorted, and the algorithm only needs to make a single comparison per element, resulting in linear time complexity.
-
 Average case: O(n^2)
-For an average or randomly ordered list, the algorithm will need to compare each element with an increasing number of elements as it moves through the list, leading to quadratic time complexity.
-
 Worst case: O(n^2)
-The worst case occurs when the list is sorted in reverse order, requiring every element to be compared with each other element already sorted, also leading to quadratic time complexity.
