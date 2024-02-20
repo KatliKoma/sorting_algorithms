@@ -1,36 +1,36 @@
 #include "sort.h"
-
 /**
  * bubble_sort - sort array elements from min to max value
  * @array: array
  * @size: array size
  */
+
 void bubble_sort(int *array, size_t size)
 {
-	size_t i, j;
-	int tmp, swapped;
+	size_t currentIndex, nextIndex, newLimit = size;
+	int swapTemp, swapOccurred = 0;
 
-	if (size < 2)
+	if (array == NULL || size < 2)
 		return;
 
-	for (i = 0; i < size - 1; i++)
+	for (currentIndex = 0; currentIndex < size; currentIndex++)
 	{
-		swapped = 0;
-
-	for (j = 0; j < size - i - 1; j++)
-	{
-		if (array[j] > array[j + 1])
+		for (nextIndex = 1; nextIndex < newLimit; nextIndex++)
 		{
-
-		tmp = array[j];
-		array[j] = array[j + 1];
-		array[j + 1] = tmp;
-		print_array(array, size);
-		swapped = 1;
+			if (array[nextIndex - 1] > array[nextIndex])
+			{
+				swapOccurred = 1;
+				swapTemp = array[nextIndex];
+				array[nextIndex] = array[nextIndex - 1];
+				array[nextIndex - 1] = swapTemp;
+				print_array(array, size);
+			}
 		}
-	}
 
-	if (!swapped)
-		break;
+		if (swapOccurred == 0)
+			break;
+
+		swapOccurred = 0;
+		newLimit--;
 	}
 }
