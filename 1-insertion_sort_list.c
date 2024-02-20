@@ -6,40 +6,52 @@
  *			using the Insertion sort algorithm
  * @list: double pointer to the head of the doubly linked list
  */
+
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *current, *tmp;
+	listint_t *current, *backtrack;
 
 	if (list == NULL || *list == NULL || (*list)->next == NULL)
 		return;
 
-	current = (*list)->next;
-
-	while (current != NULL)
+	for (current = (*list)->next; current && current->prev; current = current->next)
 	{
-		tmp = current;
-		current = current->next;
-
-		while (tmp->prev != NULL && tmp->n < tmp->prev->n)
+		for (; current && current->prev && current->n < current->prev->n;
+				current = current->prev)
 		{
-			tmp->prev->next = tmp->next;
-
-			if (tmp->next != NULL)
-				tmp->next->prev = tmp->prev;
-			tmp->next = tmp->prev;
-			tmp->prev = tmp->prev->prev;
-			tmp->next->prev = tmp;
-
-			if (tmp->prev != NULL)
-				tmp->prev->next = tmp;
-
-			else
-				*list = tmp;
-
-			if (current != NULL)
-				current->prev = tmp->next;
-
+			backtrack = current->prev;
+			nodeSwap(list, backtrack, current);
 			print_list(*list);
+			current = current->next;
 		}
 	}
+}
+
+/**
+ * nodeSwap - swaps two nodes
+ * @head: the head node
+ * @currentNode: The first node to swap
+ * @nextNode: The second node to swap
+ *
+ * Return: void
+ */
+
+void nodeSwap(listint_t **head, listint_t *currentNode, listint_t *nextNode)
+{
+	listint_t *previousNode, *followingNode;
+
+	previousNode = currentNode->prev;
+	followingNode = nextNode->next;
+
+	if (previousNode != NULL)
+		previousNode->next = nextNode;
+	else
+		*head = nextNode;
+	currentNode->prev = nextNode;
+	currentNode->next = followingNode;
+	nextNode->prev = previousNode;
+	nextNode->next = currentNode;
+
+	if (followingNode)
+		followingNode->prev = currentNode;
 }
