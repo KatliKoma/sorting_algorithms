@@ -1,0 +1,8 @@
+Best case: O(n)
+In the best case scenario, the array is already sorted, and the algorithm only needs to make one pass through the array to verify this. After the first pass, if no swaps are made, the algorithm recognizes that the array is sorted and terminates early. This results in a linear time complexity.
+
+Average case: O(n^2)
+In the average case, the elements of the array are in a random order, and the algorithm needs to perform a series of comparisons and swaps that roughly corresponds to the square of the number of elements in the array. This results in a quadratic time complexity.
+
+Worst case: O(n^2)
+In the worst case scenario, the array is sorted in reverse order. This means that each element needs to be "bubbled" all the way through the array to its correct position. Like the average case, this results in a quadratic time complexity due to the nested loop structure of the Bubble Sort algorithm.
